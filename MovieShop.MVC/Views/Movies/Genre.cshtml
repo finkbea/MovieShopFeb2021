@@ -1,0 +1,22 @@
+﻿@model List<ApplicationCore.Models.Response.MovieResponseModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model) {
+            <tr>
+                <td>
+                    <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.Id">
+                        <img src="@movie.PosterUrl" alt="@movie.Title" />
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

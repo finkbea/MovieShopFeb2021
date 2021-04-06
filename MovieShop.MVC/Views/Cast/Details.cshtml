@@ -1,0 +1,26 @@
+﻿@using System.Globalization
+@using ApplicationCore.ServiceInterfaces
+@model ApplicationCore.Models.Response.CastDetailsResponseModel
+<div class="">
+    <div>
+        <h1>@Model.Name</h1>
+        <img src="@Model.ProfilePath" class="cast-small-img rounded-circle"/>
+    </div>
+</div>
+<div>
+    <h2>Movies</h2>
+    <table class="table">
+        <tbody>
+            @foreach (var movie in Model?.Movies) {
+                <tr>
+                    <td>
+                        <img src="@movie.PosterUrl"
+                             class="" style="height:60px"
+/>
+                    </td>
+                    <td>@movie.Title</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
