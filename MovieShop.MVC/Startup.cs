@@ -15,6 +15,7 @@ using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using ApplicationCore.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MovieShop.MVC {
     public class Startup {
@@ -26,7 +27,10 @@ namespace MovieShop.MVC {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(
+                options => options.Filters.Add(typeof(MovieShopHeaderFilter))
+            );
+
 
             services.AddDbContext<MovieShopDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MovieShopDbConnection")));
@@ -39,6 +43,20 @@ namespace MovieShop.MVC {
             services.AddScoped<IAsyncRepository<Crew>, EFRepository<Crew>>();
             services.AddScoped<ICastService, CastService>();
             services.AddScoped<IAsyncRepository<Cast>, CastRepository>();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                           .AddCookie(options =>
+                           {
+                               options.Cookie.Name = "MovieShopAuthCookie";
+                               options.ExpireTimeSpan = TimeSpan.FromHours(2);
+                               options.LoginPath = "/Account/login";
+                           });
+            services.AddHttpContextAccessor();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +75,7 @@ namespace MovieShop.MVC {
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

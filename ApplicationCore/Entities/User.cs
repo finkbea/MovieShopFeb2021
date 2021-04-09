@@ -23,6 +23,7 @@ namespace ApplicationCore.Entities {
         public DateTime? LastLoginDateTime { get; set; }
         public bool? IsLocked { get; set; }
         public int? AccessFailedCount { get; set; }
+        public string ProfilePictureUrl { get; set; }
 
         public ICollection<Genre> Genres { get; set; }
         public ICollection<Role> Roles { get; set; }
