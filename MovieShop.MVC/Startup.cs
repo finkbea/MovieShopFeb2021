@@ -41,13 +41,10 @@ namespace MovieShop.MVC {
 
             services.AddTransient<IMovieService, MovieService>();
             services.AddScoped<IGenreService, GenreService>();
-            //services.AddScoped<ICrewService, CrewService>();
             services.AddScoped<IMovieRepository, MovieRepository>(); //any time the constructor sees IMovieService replace it with MovieService, registering 
             services.AddScoped<IAsyncRepository<Genre>, EFRepository<Genre>>();
-            services.AddScoped<IAsyncRepository<Crew>, EFRepository<Crew>>();
             services.AddScoped<ICastService, CastService>();
             services.AddScoped<IAsyncRepository<Cast>, CastRepository>();
-
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();

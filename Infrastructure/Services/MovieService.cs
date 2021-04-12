@@ -14,13 +14,8 @@ namespace Infrastructure.Services {
     public class MovieService : IMovieService {
 
         private readonly IMovieRepository _movieRepository;
-        private readonly IAsyncRepository<Cast> _castRepository;
-        private readonly IAsyncRepository<Genre> _genreRepository;
-
-        public MovieService(IMovieRepository movieRepository, IAsyncRepository<Cast> castRepository, IAsyncRepository<Genre> genreRepository) {
+        public MovieService(IMovieRepository movieRepository) {
             _movieRepository = movieRepository;
-            _castRepository = castRepository;
-            _genreRepository = genreRepository;
         }
         public async Task<List<MovieCardResponseModel>> Get30HighestGrossing() {
             

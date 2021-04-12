@@ -82,13 +82,8 @@ namespace Infrastructure.Services {
             using (var rng = RandomNumberGenerator.Create()) {
                 rng.GetBytes(randomBytes);
             }
-
-
-
             return Convert.ToBase64String(randomBytes);
         }
-
-
 
         private string HashPassword(string password, string salt) {
             var hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
@@ -100,22 +95,14 @@ namespace Infrastructure.Services {
             return hashed;
         }
 
-
-
         public async Task<LoginResponseModel> ValidateUser(string email, string password) {
             // we should go to database and get the record by email
 
-
-
             var dbUser = await _userRepository.GetUserByEmail(email);
-
-
 
             if (dbUser == null) {
                 return null;
             }
-
-
 
             var hashedPassword = HashPassword(password, dbUser.Salt);
             if (hashedPassword == dbUser.HashedPassword) {
@@ -129,9 +116,6 @@ namespace Infrastructure.Services {
                 };
                 return loginUserResponse;
             }
-
-
-
             return null;
         }
     }
