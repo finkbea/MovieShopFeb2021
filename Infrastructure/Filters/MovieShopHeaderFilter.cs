@@ -7,7 +7,7 @@ using ApplicationCore.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Infrastructure.Filters {
-    class MovieShopHeaderFilter : IActionFilter {
+    public class MovieShopHeaderFilter : IActionFilter {
         private readonly ICurrentUserService _currentUserService;
         public MovieShopHeaderFilter(ICurrentUserService currentUserService) {
             _currentUserService = currentUserService;

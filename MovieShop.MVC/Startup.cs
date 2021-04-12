@@ -16,6 +16,9 @@ using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using ApplicationCore.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MovieShop.MVC.Middlewares;
+using Infrastructure.Filters;
+using Serilog;
 
 namespace MovieShop.MVC {
     public class Startup {
@@ -27,6 +30,7 @@ namespace MovieShop.MVC {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddControllersWithViews();
             services.AddControllersWithViews(
                 options => options.Filters.Add(typeof(MovieShopHeaderFilter))
             );
@@ -56,13 +60,15 @@ namespace MovieShop.MVC {
                                options.LoginPath = "/Account/login";
                            });
             services.AddHttpContextAccessor();
+            services.AddMemoryCache();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
+                app.UseMovieShopExceptionMiddleware();
             }
             else {
                 app.UseExceptionHandler("/Home/Error");
@@ -73,6 +79,9 @@ namespace MovieShop.MVC {
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSerilogRequestLogging();
+
 
             app.UseAuthorization();
             app.UseAuthentication();
