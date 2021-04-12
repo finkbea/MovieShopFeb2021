@@ -24,7 +24,7 @@ namespace Infrastructure.Filters {
         }
 
         public void OnActionExecuting(ActionExecutingContext context) {
-            //int x = 20 / 10;
+            int x = 20 / 10;
         }
     }
 }

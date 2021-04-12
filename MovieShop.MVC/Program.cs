@@ -13,8 +13,9 @@ namespace MovieShop.MVC {
     public class Program {
         public static void Main(string[] args) {
             //https://nblumhardt.com/2019/10/serilog-in-aspnetcore-3/ for future reference
-            CreateHostBuilder(args).Build().Run();
-            /*var configuration = new ConfigurationBuilder()
+            //for emailing through serilog
+            //CreateHostBuilder(args).Build().Run();
+            var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
 
@@ -30,30 +31,9 @@ namespace MovieShop.MVC {
             }
             finally { //runs after control leaves try statement
                 Log.CloseAndFlush();
-            }*/
+            }
         }
-        /*
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
 
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
-                .CreateLogger();
-
-            try
-            {
-                Log.Information("Application Starting Up");
-                CreateHostBuilder(args).Build().Run();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "Application Failed to Start correctly");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }*/
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

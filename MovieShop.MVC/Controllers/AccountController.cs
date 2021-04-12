@@ -42,7 +42,7 @@ namespace MovieShop.MVC.Controllers {
         [HttpPost]
         public async Task<IActionResult> Login(LoginRequestModel model, string returnUrl=null) {
             if (string.IsNullOrEmpty(returnUrl)) {
-                returnUrl = Url.Content("~/");
+                returnUrl ??= Url.Content("~/");
             }
 
             var user = await _userService.ValidateUser(model.Email, model.Password);

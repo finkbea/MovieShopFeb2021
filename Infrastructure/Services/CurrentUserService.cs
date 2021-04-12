@@ -20,13 +20,14 @@ namespace Infrastructure.Services {
         public string Email => _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         public string FullName => _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value + " " +
             _httpContextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value;
-        public string ProfilePicture { get; }
-        public bool IsAdmin { get; }
-        public bool IsSuperAdmin { get; }
+        public string ProfilePicture => throw new NotImplementedException();
+        public string RemoteIpAddress => _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString();
+        public bool IsAdmin => throw new NotImplementedException();
+        public bool IsSuperAdmin => throw new NotImplementedException();
 
         public IEnumerable<Claim> GetClaimsIdentity() {
             throw new NotImplementedException();
         }
-        public IEnumerable<string> Roles { get; }
+        public IEnumerable<string> Roles => throw new NotImplementedException();
     }
 }
