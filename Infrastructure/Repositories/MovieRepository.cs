@@ -42,6 +42,16 @@ namespace Infrastructure.Repositories {
             return movies;
         }
 
+        public async Task<IEnumerable<Movie>> GetTopGrossing() {
+            var movies = await _dbContext.Movies.OrderByDescending(m => m.Revenue).ToListAsync();
+            return movies;
+        }
+
+        public async Task<IEnumerable<Movie>> GetTopRated() {
+            var movies = await _dbContext.Movies.OrderByDescending(m => m.Rating).ToListAsync();
+            return movies;
+        }
+
         /*public async Task<IEnumerable<Movie>> GetMoviesByMovieCastAsync(int castId) {
             var movies = await _dbContext.MovieCasts.Include(c => c.Movie).Where(c => c.CastId == castId).DefaultIfEmpty().SelectMany(c => c.Movie).ToListAsync();
             return movies;

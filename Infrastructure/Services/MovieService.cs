@@ -97,6 +97,62 @@ namespace Infrastructure.Services {
             return result;
         }
 
+        public async Task<IEnumerable<MovieCardResponseModel>> GetTopRatedMovies() {
+            var movies = await _movieRepository.GetTopRated();
+
+            var result = new List<MovieCardResponseModel>();
+
+            foreach (var movie in movies) {
+                result.Add(
+                new MovieCardResponseModel
+                {
+                    Id = movie.Id,
+                    Title = movie.Title,
+                    PosterUrl = movie.PosterUrl
+                });
+            }
+
+            return result;
+        }
+        public async Task<IEnumerable<MovieCardResponseModel>> GetHighestGrossingMovies() {
+            var movies = await _movieRepository.GetTopGrossing();
+
+            var result = new List<MovieCardResponseModel>();
+
+            foreach (var movie in movies) {
+                result.Add(
+                new MovieCardResponseModel
+                {
+                    Id = movie.Id,
+                    Title = movie.Title,
+                    PosterUrl = movie.PosterUrl
+                });
+            }
+
+            return result;
+        }
+
+        public async Task<MovieReviewResponseModel> GetReviewsForMovie(int id) {
+            var movie = await _movieRepository.GetByIdAsync(id);
+            var reviews = new List<MovieReviewSubResponseModel>();
+            foreach (var review in movie.Reviews) {
+                reviews.Add(new MovieReviewSubResponseModel
+                {
+                    UserId = review.UserId,
+                    MovieId = review.MovieId,
+                    ReviewText = review.ReviewText,
+                    Rating = review.Rating,
+                });
+            }
+            var result = new MovieReviewResponseModel
+            {
+                Id = movie.Id,
+                MovieReviews = reviews
+            };
+
+            return result;
+        }
+
         /*public async Task<IEnumerable<MovieCardResponseModel>> GetMoviesByMovieCastAsync(int castId) {
             var movies = await _movieRepository.GetMoviesByMovieCastAsync(castId);
             var result = new List<MovieCardResponseModel>();

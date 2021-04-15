@@ -16,6 +16,9 @@ namespace ApplicationCore.ServiceInterfaces {
 
         Task<MovieDetailsResponseModel> GetMovieAsync(int id);
         Task<IEnumerable<MovieResponseModel>> GetMoviesByGenreAsync(int id);
+        Task<IEnumerable<MovieCardResponseModel>> GetTopRatedMovies();
+        Task<IEnumerable<MovieCardResponseModel>> GetHighestGrossingMovies();
+        Task<MovieReviewResponseModel> GetReviewsForMovie(int id);
         //Task<IEnumerable<MovieCardResponseModel>> GetMoviesByMovieCastsAsync(int castId);
         /*Task<PagedResultSet<MovieDetailsResponseModel>> GetMoviesByPagination(int pageSize = 20, int page = 1, string title = "");
         Task<PagedResultSet<MovieDetailsResponseModel>> GetAllMoviePurchasesByPagination(int pageSize = 20, int page = 1);

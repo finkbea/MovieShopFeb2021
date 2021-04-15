@@ -23,7 +23,7 @@ namespace MovieShop.MVC.Middlewares {
 
         public async Task Invoke(HttpContext httpContext) {
             try {
-
+                await _next(httpContext);
             }
             catch (Exception ex) {
                 _logger.LogError("Middleware is catching exception");

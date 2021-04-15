@@ -24,8 +24,6 @@ namespace Infrastructure.Services {
             // first check whether email exists in database
             var dbUser = await _userRepository.GetUserByEmail(registerRequestModel.Email);
 
-
-
             // user exists in database
             if (dbUser != null) {
                 throw new ConflictException("user already exists, please login");
@@ -33,19 +31,12 @@ namespace Infrastructure.Services {
 
             var salt = CreateSalt();
 
-
-
             //var saltExistsDb =  await _userRepository.SaltExists(salt);
-
-
 
             //if (!saltExistsDb)
             //{
             //    // continue
             //}
-
-
-
 
             var hashedPassword = HashPassword(registerRequestModel.Password, salt);
 
@@ -59,8 +50,6 @@ namespace Infrastructure.Services {
                 DateOfBirth = registerRequestModel.DateOfBirth
             };
 
-
-
             var createdUser = await _userRepository.AddAsync(user);
             var createdUserResponseModel = new UserRegisterResponseModel
             {
@@ -70,7 +59,9 @@ namespace Infrastructure.Services {
                 LastName = createdUser.LastName
             };
 
-
+            if (!IsValidEmail(createdUser.Email)) {
+                throw new ConflictException("please enter a valid email address");
+            }
 
             return createdUserResponseModel;
         }
@@ -117,6 +108,16 @@ namespace Infrastructure.Services {
                 return loginUserResponse;
             }
             return null;
+        }
+
+        bool IsValidEmail(string email) {
+            try {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch {
+                return false;
+            }
         }
     }
 }

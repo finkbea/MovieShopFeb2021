@@ -1,16 +1,24 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationCore.ServiceInterfaces;
+using ApplicationCore.RepositoryInterfaces;
+using Infrastructure.Services;
+using Infrastructure.Data;
+using Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+using ApplicationCore.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Infrastructure.Filters;
+using Serilog;
+using Microsoft.OpenApi.Models;
 
 namespace MovieShop.API {
     public class Startup {
@@ -23,7 +31,34 @@ namespace MovieShop.API {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
-            services.AddControllers();
+            services.AddControllersWithViews(
+            options => options.Filters.Add(typeof(MovieShopHeaderFilter))
+);
+
+
+            services.AddDbContext<MovieShopDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MovieShopDbConnection")));
+
+            services.AddTransient<IMovieService, MovieService>();
+            services.AddScoped<IGenreService, GenreService>();
+            services.AddScoped<IMovieRepository, MovieRepository>(); //any time the constructor sees IMovieService replace it with MovieService, registering 
+            services.AddScoped<IAsyncRepository<Genre>, EFRepository<Genre>>();
+            services.AddScoped<ICastService, CastService>();
+            services.AddScoped<IAsyncRepository<Cast>, CastRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                           .AddCookie(options =>
+                           {
+                               options.Cookie.Name = "MovieShopAuthCookie";
+                               options.ExpireTimeSpan = TimeSpan.FromHours(2);
+                               options.LoginPath = "/Account/login";
+                           });
+            services.AddHttpContextAccessor();
+            services.AddMemoryCache();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MovieShop.API", Version = "v1" });
@@ -37,6 +72,12 @@ namespace MovieShop.API {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MovieShop.API v1"));
             }
+
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins(Configuration.GetValue<string>("clientSPAUrl")).AllowAnyHeader()
+                    .AllowAnyMethod().AllowCredentials();
+            });
 
             app.UseHttpsRedirection();
 
