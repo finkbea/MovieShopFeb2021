@@ -13,6 +13,6 @@ export class GenreService {
   getAllGenres() : Observable<Genre[]>{
     //call the api
     //https://localhost:44302/api/Genres
-    return this.apiService.getAll('Genres');
+    return this.apiService.getAll('genres');
   }
 }

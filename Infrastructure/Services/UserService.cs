@@ -66,8 +66,6 @@ namespace Infrastructure.Services {
             return createdUserResponseModel;
         }
 
-
-
         private string CreateSalt() {
             byte[] randomBytes = new byte[128 / 8];
             using (var rng = RandomNumberGenerator.Create()) {
@@ -110,7 +108,7 @@ namespace Infrastructure.Services {
             return null;
         }
 
-        bool IsValidEmail(string email) {
+        private bool IsValidEmail(string email) {
             try {
                 var addr = new System.Net.Mail.MailAddress(email);
                 return addr.Address == email;

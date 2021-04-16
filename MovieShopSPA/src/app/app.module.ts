@@ -9,10 +9,11 @@ import { HeaderComponent } from './core/layout/header/header.component';
 import { FooterComponent } from './core/layout/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MovieCardComponent } from './shared/components/movie-card/movie-card.component';
-import { MovieDetailsComponent } from './movies/movie-details/movie-details.component';
+import { MoviedetailsComponent } from './movies/movie-details/movie-details.component';
 import { MovieCardListComponent } from './movies/movie-card-list/movie-card-list.component';
 import { HomeComponent } from './home/home/home.component';
-import { MoviedetailsComponent } from './moviedetails/moviedetails.component';
+import { LoginComponent } from './auth/login/login.component';
+import { GenreComponent } from './core/genre/genre.component';
 
 @NgModule({
   declarations: [
@@ -21,10 +22,12 @@ import { MoviedetailsComponent } from './moviedetails/moviedetails.component';
     HeaderComponent,
     FooterComponent,
     MovieCardComponent,
-    MovieDetailsComponent,
+    MoviedetailsComponent,
     MovieCardListComponent,
     HomeComponent,
-    MoviedetailsComponent
+    MoviedetailsComponent,
+    LoginComponent,
+    GenreComponent
   ],
   imports: [
     BrowserModule,

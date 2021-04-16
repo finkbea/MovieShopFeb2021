@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.ServiceInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,5 +16,13 @@ namespace MovieShop.API.Controllers {
             _userService = userService;
         }
 
+        [Authorize]
+        [HttpGet]
+        [Route("{id:int}/purchases")]
+        public async Task<IActionResult> GetPurchasedMovies() {
+            // get all movies purchased by user by calling service
+            //var userPurchasedMovies = _userService.
+            return Ok();
+        }
     }
 }

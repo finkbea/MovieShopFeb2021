@@ -43,12 +43,12 @@ namespace Infrastructure.Repositories {
         }
 
         public async Task<IEnumerable<Movie>> GetTopGrossing() {
-            var movies = await _dbContext.Movies.OrderByDescending(m => m.Revenue).ToListAsync();
+            var movies = await _dbContext.Movies.OrderByDescending(m => m.Revenue).Take(30).ToListAsync();
             return movies;
         }
 
         public async Task<IEnumerable<Movie>> GetTopRated() {
-            var movies = await _dbContext.Movies.OrderByDescending(m => m.Rating).ToListAsync();
+            var movies = await _dbContext.Movies.OrderByDescending(m => m.Rating).Take(30).ToListAsync();
             return movies;
         }
 

@@ -18,18 +18,26 @@ export class ApiService {
     return this.http.get(`${environment.apiUrl}${path}`)
     .pipe(
       map( resp => resp as any[])
-    ) ;
+    ) 
   }
 
   getDetails(path: string, id?:number) : Observable<any> {
     return this.http.get(`${environment.apiUrl}${path}`+'/'+id).pipe(
       map( resp => resp as any)
-    );
+    )
   }
   
   /*getNodeMajorVersion(path: string, id?: number): Observable<any> {
     return 0;
   }*/
+
+  create(path: string, resource: any, options?: any) :Observable<any>{
+    return this.http.post(`${environment.apiUrl}${path}`, resource).pipe(
+      map(response => response)
+    )
+  }
+  
+
   
 }
 

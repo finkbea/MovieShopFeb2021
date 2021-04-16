@@ -19,6 +19,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Infrastructure.Filters;
 using Serilog;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MovieShop.API {
     public class Startup {
@@ -48,6 +52,7 @@ namespace MovieShop.API {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IJwtService, JwtService>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                            .AddCookie(options =>
@@ -59,6 +64,27 @@ namespace MovieShop.API {
             services.AddHttpContextAccessor();
             services.AddMemoryCache();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+                            options =>
+                            {
+                                options.TokenValidationParameters = new TokenValidationParameters
+                                {
+                                    ValidateIssuer = false,
+                                    ValidateAudience = false,
+                                    ValidateIssuerSigningKey = true,
+                                    IssuerSigningKey =
+                                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenSetting:PrivateKey"]))
+                                };
+                            }
+                        );
+
+            services.AddAuthorization(options =>
+            {
+                var defaultAuthorizationPolicyBuilder =
+                    new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme);
+                defaultAuthorizationPolicyBuilder = defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
+                options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MovieShop.API", Version = "v1" });
@@ -82,7 +108,7 @@ namespace MovieShop.API {
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
