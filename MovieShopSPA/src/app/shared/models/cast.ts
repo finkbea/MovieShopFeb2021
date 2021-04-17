@@ -1,3 +1,5 @@
+import { MovieCard } from "./moviecard";
+
 export interface Cast {
     id: number;
     name: string;
@@ -5,4 +7,5 @@ export interface Cast {
     tmdbUrl: string;
     profilePath: string;
     character: string;
+    movies: MovieCard[];
   }

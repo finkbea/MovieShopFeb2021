@@ -19,10 +19,15 @@ export class MoviedetailsComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.id = +params.getAll('id');
       this.getMovieDetails();
+      console.table(this.movie);
     });
   }
   private getMovieDetails(){
-    this.movieService.getMovieDetails(this.id).subscribe (m => this.movie=m);
+    this.movieService.getDetails(this.id).subscribe (
+      m => {this.movie=m
+      console.log(this.movie);
+    });
+    
   }
 
 

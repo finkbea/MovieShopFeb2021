@@ -14,11 +14,14 @@ export class MovieService {
   getTop30GrossingMovies() :Observable<MovieCard[]> {
     return this.apiService.getAll('movies/toprevenue');
   }
+  getMoviesInGenre(id: number | undefined) :Observable<MovieCard[]> {
+    return this.apiService.getAll('movies/genre/'+id);
+  }
 
   /*getMovie(id: number) :Observable<MovieDetails> {
     //return this.apiService.getById({'movies'}, id);
   }*/
-  getMovieDetails(id: number | undefined): Observable<MovieDetails> {
+  getDetails(id: number | undefined): Observable<MovieDetails> {
     return this.apiService.getDetails(`${'movies'}`,id);
   }
 

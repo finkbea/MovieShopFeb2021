@@ -25,7 +25,7 @@
                     {{movie?.runtime}} minutes | {{movie?.releasedate}}
                 </div>
                 <div class="col-8">
-                    <a class="badge badge-pill badge-dark ml-1" a *ngFor="let genre of movie?.genres" [routerLink]="['genres/movies', genre?.id]" >
+                    <a class="badge badge-pill badge-dark ml-1" a *ngFor="let genre of movie?.genres" [routerLink]="['../../movies/genre', genre?.id]" >
                         {{ genre.name }}
                     </a>
                 </div>
@@ -96,7 +96,9 @@
 
             <li class="list-group-item">
                 <i class="fas fa-hourglass-half mr-2"></i>Run Time
-                <span class="badge badge-pill badge-dark">{{movie?.runtime}} minutes</span>
+                <span class="badge badge-pill badge-dark">
+                    {{movie?.runtime}} minutes
+                </span>
             </li>
             <li class="list-group-item">
                 <i class="far fa-money-bill-alt"></i> Box Office
@@ -132,17 +134,17 @@
 
         <table class="table" >
             <tbody>
-                <tr *ngFor="let cast of movie?.casts">
+                <tr *ngFor="let cast of movie?.casts" [routerLink]="['../../cast', cast?.id]">
                     <td>
                         <img src="{{cast.profilePath}}"
                         class="cast-small-img rounded-circle" style="height:60px"
-                        alt="@cast.Name" />
+                        alt="{{cast.name}}" />
                     </td>
                     <td>{{cast.name}}</td>
                     <td>{{cast.character}}</td>
                 </tr>
 
-                <a class="badge badge-pill badge-dark ml-1" *ngFor="let genre of movie?.genres" [routerLink]="['genres/movies', genre.id]">
+                <a class="badge badge-pill badge-dark ml-1" a *ngFor="let genre of movie?.genres" [routerLink]="['../../movies/genre', genre?.id]" >
                     {{ genre.name }}
                 </a>
 

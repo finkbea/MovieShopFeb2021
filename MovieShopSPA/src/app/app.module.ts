@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GenresComponent } from './genres/genres.component';
@@ -13,7 +12,9 @@ import { MoviedetailsComponent } from './movies/movie-details/movie-details.comp
 import { MovieCardListComponent } from './movies/movie-card-list/movie-card-list.component';
 import { HomeComponent } from './home/home/home.component';
 import { LoginComponent } from './auth/login/login.component';
-import { GenreComponent } from './core/genre/genre.component';
+import { CastComponent } from './cast/cast.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +28,16 @@ import { GenreComponent } from './core/genre/genre.component';
     HomeComponent,
     MoviedetailsComponent,
     LoginComponent,
-    GenreComponent
+    CastComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
