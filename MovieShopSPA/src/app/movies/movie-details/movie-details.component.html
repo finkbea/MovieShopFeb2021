@@ -22,7 +22,7 @@
 
             <div class="row">
                 <div class="col-4 text-secondary font-weight-bold mt-2">
-                    {{movie?.runtime}} minutes | {{movie?.releasedate}}
+                    {{movie?.runTime}} minutes | {{movie?.releaseDate}}
                 </div>
                 <div class="col-8">
                     <a class="badge badge-pill badge-dark ml-1" a *ngFor="let genre of movie?.genres" [routerLink]="['../../movies/genre', genre?.id]" >
@@ -91,13 +91,13 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <i class="far fa-calendar-alt mr-2"></i>Release Date
-                <span class="badge badge-pill badge-dark">{{movie?.releasedate}}</span>
+                <span class="badge badge-pill badge-dark">{{movie?.releaseDate}}</span>
             </li>
 
             <li class="list-group-item">
                 <i class="fas fa-hourglass-half mr-2"></i>Run Time
                 <span class="badge badge-pill badge-dark">
-                    {{movie?.runtime}} minutes
+                    {{movie?.runTime}} minutes
                 </span>
             </li>
             <li class="list-group-item">

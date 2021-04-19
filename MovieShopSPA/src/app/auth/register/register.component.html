@@ -1,9 +1,11 @@
 <h1>Register</h1>
 <h4>UserRegisterRequestModel</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
-        <form [formGroup]="registerFormGroup">
+        <form [formGroup]="registerFormGroup" (ngSubmit)="register()" #loginForm="ngForm">
+          <div *ngIf="invalidEmail" class="alert alert-danger">
+            Please enter a valid email address
+          </div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label>Email</label>
@@ -26,12 +28,12 @@
                 <input type="date" class="form-control" formControlName="dateOfBirth" />
               </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" [routerLink]="['../']">Back to List</a>
 </div>

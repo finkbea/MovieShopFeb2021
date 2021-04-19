@@ -26,6 +26,11 @@ namespace MovieShop.API.Controllers {
             var registeredUser = await _userService.RegisterUser(requestModel);
             return Ok(registeredUser);
         }
+        
+        /*[HttpGet]
+        public async Task<IActionResult> GetAccount() {
+              
+        }*/
 
         [HttpPost]
         [Route("login")]

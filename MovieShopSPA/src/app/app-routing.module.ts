@@ -10,11 +10,12 @@ import { MoviedetailsComponent } from './movies/movie-details/movie-details.comp
 
 const routes: Routes = [
     {path: "", component: HomeComponent},
+    
     {path: "movies/genre/:id", component: MovieCardListComponent},
     {path: "movies/:id", component:MoviedetailsComponent},
     {path: "cast/:id", component:CastComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent}
+    {path: 'register', component: RegisterComponent},
 ];
 
 @NgModule({

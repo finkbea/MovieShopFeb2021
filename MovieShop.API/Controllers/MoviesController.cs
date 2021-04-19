@@ -19,7 +19,7 @@ namespace MovieShop.API.Controllers {
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> Index() {
-            var movies = await _movieService.Get30HighestGrossing();
+            var movies = await _movieService.GetAll();
             return Ok(movies);
         }
 
@@ -33,7 +33,7 @@ namespace MovieShop.API.Controllers {
         [HttpGet]
         [Route("toprated")]
         public async Task<IActionResult> GetTopRated() {
-            var movie = await _movieService.GetTopRatedMovies();
+            var movie = await _movieService.Get30HighestGrossing();
             return Ok(movie);
         }
 

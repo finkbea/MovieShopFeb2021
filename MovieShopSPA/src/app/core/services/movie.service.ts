@@ -24,6 +24,9 @@ export class MovieService {
   getDetails(id: number | undefined): Observable<MovieDetails> {
     return this.apiService.getDetails(`${'movies'}`,id);
   }
+  getAllMovies() : Observable<MovieCard[]>{
+    return this.apiService.getAll('movies');
+  }
 
 
 }

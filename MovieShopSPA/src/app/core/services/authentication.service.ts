@@ -74,4 +74,8 @@ export class AuthenticationService {
       this.isAuthenticatedSubject.next(true);
     }
   }
+
+  register(user: User){
+    return this.apiService.create('Account', user);
+  }
 }

@@ -13,10 +13,10 @@ export interface MovieDetails {
     revenue: number;
     imdblurl: string;
     tmdburl: string;
-    releasedate: Date;
-    runtime: number;
+    releaseDate: Date;
+    runTime: number;
     price: number,
-    favoritescount: number;
+    favoritesCount: number;
     casts: Cast[];
     genres: Genre[];
 }

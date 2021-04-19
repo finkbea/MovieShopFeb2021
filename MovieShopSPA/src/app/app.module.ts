@@ -29,7 +29,7 @@ import { RegisterComponent } from './auth/register/register.component';
     MoviedetailsComponent,
     LoginComponent,
     CastComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
