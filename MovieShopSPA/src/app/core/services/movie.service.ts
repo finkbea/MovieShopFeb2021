@@ -26,7 +26,7 @@ export class MovieService {
   }
 
   getStringDetails(sstring: string | undefined): Observable<MovieCard[]> {
-    return this.apiService.getStringDetails(`${'movies/search/'}`,sstring);
+    return this.apiService.getStringDetails(`${''}`,sstring);
   }
 
   getAllMovies() : Observable<MovieCard[]>{

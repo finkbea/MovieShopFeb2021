@@ -10,7 +10,7 @@ import { MoviedetailsComponent } from './movies/movie-details/movie-details.comp
 
 const routes: Routes = [
     {path: "", component: HomeComponent},
-    {path: ":sstring", component:HomeComponent},
+    {path: "movies/search/:sstring", component:HomeComponent},
     {path: "movies/genre/:id", component: MovieCardListComponent},
     {path: "movies/:id", component:MoviedetailsComponent},
     {path: "cast/:id", component:CastComponent},

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieCard } from 'src/app/shared/models/moviecard';
 import { User } from 'src/app/shared/models/user';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -31,7 +31,9 @@ export class HeaderComponent implements OnInit {
   }
 
   search(): void {
-    this.router.navigate(['', this.searchString]);
+    console.log("the fuck");
+    this.router.navigate(['movies/search/', this.searchString]);
+    console.log("the fuck");
   }
 
   logout() : void {
