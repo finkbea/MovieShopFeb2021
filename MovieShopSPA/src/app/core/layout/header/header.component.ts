@@ -12,7 +12,7 @@ import { MovieService } from '../../services/movie.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isAuthenticated: boolean | undefined;
+  isAuthenticated: boolean =false;
   currentUser: User | undefined;
   searchString='';
 
@@ -31,12 +31,12 @@ export class HeaderComponent implements OnInit {
   }
 
   search(): void {
-    console.log("the fuck");
     this.router.navigate(['movies/search/', this.searchString]);
-    console.log("the fuck");
   }
 
   logout() : void {
+    this.isAuthenticated=false;
+    console.log('Auth Status'+this.isAuthenticated);
     this.authService.logout;
   }
 

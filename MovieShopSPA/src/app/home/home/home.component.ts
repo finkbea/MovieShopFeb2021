@@ -28,10 +28,8 @@ export class HomeComponent implements OnInit {
   }
   
   populate(){
-    console.log("the fuck");
     this.sstring=this.router.url.substring(1);
     //normal home page
-    console.log("sstring: "+this.sstring);
     if (this.sstring == undefined || this.sstring==""){
       this.movieService.getTop30GrossingMovies().subscribe(
         m => {

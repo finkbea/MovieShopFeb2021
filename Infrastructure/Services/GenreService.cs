@@ -16,27 +16,28 @@ namespace Infrastructure.Services {
         private const string genresCacheKey = "genres";
         private readonly TimeSpan _cacheDuration = TimeSpan.FromDays(20);
 
-        public GenreService (IAsyncRepository<Genre> genreRepository, IMemoryCache cache) {
+        public GenreService(IAsyncRepository<Genre> genreRepository, IMemoryCache cache) {
             _genreRepository = genreRepository;
             _cache = cache;
         }
-
         public async Task<IEnumerable<GenreModel>> GetAllGenres() {
+
             var genres = await _cache.GetOrCreateAsync(genresCacheKey, CacheCheck);
             return genres;
         }
+
         private async Task<IEnumerable<GenreModel>> CacheCheck(ICacheEntry entry) {
             entry.SlidingExpiration = _cacheDuration;
             var genres = await _genreRepository.ListAllAsync();
-            var result = new List<GenreModel>();
+            var genresModel = new List<GenreModel>();
             foreach (var genre in genres) {
-                result.Add(new GenreModel
+                genresModel.Add(new GenreModel
                 {
                     Id = genre.Id,
                     Name = genre.Name
                 });
             }
-            return result.OrderBy(g => g.Name); 
+            return genresModel.OrderBy(g => g.Name);
         }
     }
 }

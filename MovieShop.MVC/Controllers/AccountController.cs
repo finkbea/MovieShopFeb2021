@@ -27,7 +27,8 @@ namespace MovieShop.MVC.Controllers {
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterRequestModel model) {
             var user = await _userService.RegisterUser(model);
-            return View();
+            
+            return Redirect("https://localhost:44376/Home");
         }
 
         [HttpGet]
@@ -75,7 +76,6 @@ namespace MovieShop.MVC.Controllers {
             //creating the cookie
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
             return LocalRedirect(returnUrl);
         }
     }
