@@ -26,6 +26,12 @@ export class ApiService {
       map( resp => resp as any)
     )
   }
+
+  getStringDetails(path: string, sstring?:string) : Observable<any> {
+    return this.http.get(`${environment.apiUrl}${path}`+sstring).pipe(
+      map( resp => resp as any)
+    )
+  }
   
   /*getNodeMajorVersion(path: string, id?: number): Observable<any> {
     return 0;

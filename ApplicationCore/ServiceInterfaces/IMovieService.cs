@@ -19,7 +19,7 @@ namespace ApplicationCore.ServiceInterfaces {
         Task<IEnumerable<MovieCardResponseModel>> GetTopRatedMovies();
         Task<IEnumerable<MovieCardResponseModel>> GetHighestGrossingMovies();
         Task<MovieReviewResponseModel> GetReviewsForMovie(int id);
-
+        Task<IEnumerable<MovieCardResponseModel>> GetMoviesByString(string sstring);
         Task<List<MovieCardResponseModel>> GetAll();
         //Task<IEnumerable<MovieCardResponseModel>> GetMoviesByMovieCastsAsync(int castId);
         /*Task<PagedResultSet<MovieDetailsResponseModel>> GetMoviesByPagination(int pageSize = 20, int page = 1, string title = "");

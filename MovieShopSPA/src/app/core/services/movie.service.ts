@@ -24,6 +24,11 @@ export class MovieService {
   getDetails(id: number | undefined): Observable<MovieDetails> {
     return this.apiService.getDetails(`${'movies'}`,id);
   }
+
+  getStringDetails(sstring: string | undefined): Observable<MovieCard[]> {
+    return this.apiService.getStringDetails(`${'movies/search/'}`,sstring);
+  }
+
   getAllMovies() : Observable<MovieCard[]>{
     return this.apiService.getAll('movies');
   }

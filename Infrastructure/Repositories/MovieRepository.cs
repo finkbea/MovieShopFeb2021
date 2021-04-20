@@ -57,6 +57,12 @@ namespace Infrastructure.Repositories {
             return movies;
         }
 
+        public async Task<IEnumerable<Movie>> GetByStringAsync(string sstring) {
+
+            var movies = await _dbContext.Movies.OrderByDescending(m => m.Revenue).Where(m => m.Title.Contains(sstring)).ToListAsync();
+            return movies;
+        }
+
         /*public async Task<IEnumerable<Movie>> GetMoviesByMovieCastAsync(int castId) {
             var movies = await _dbContext.MovieCasts.Include(c => c.Movie).Where(c => c.CastId == castId).DefaultIfEmpty().SelectMany(c => c.Movie).ToListAsync();
             return movies;

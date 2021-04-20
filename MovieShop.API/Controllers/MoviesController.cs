@@ -24,6 +24,13 @@ namespace MovieShop.API.Controllers {
         }
 
         [HttpGet]
+        [Route("search/{sstring}")]
+        public async Task<IActionResult> StringDetails(string sstring) {
+            var movie = await _movieService.GetMoviesByString(sstring);
+            return Ok(movie);
+        }
+
+        [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> Details(int id) {
             var movie = await _movieService.GetMovieAsync(id);

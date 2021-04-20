@@ -11,7 +11,7 @@ namespace ApplicationCore.RepositoryInterfaces {
         Task<IEnumerable<Movie>> GetMoviesByGenreAsync(int genreId, int pageSize = 25, int page = 1);
         Task<IEnumerable<Movie>> GetTopGrossing();
         Task<IEnumerable<Movie>> GetTopRated();
-
+        Task<IEnumerable<Movie>> GetByStringAsync(string sstring);
         Task<IEnumerable<Movie>> GetAll();
         //Task<IEnumerable<Movie>> GetMoviesByGenreAsync(int genreId);
         /*Task<IEnumerable<Movie>> GetMoviesByMovieCastAsync(int castId);*/

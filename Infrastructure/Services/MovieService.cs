@@ -172,6 +172,26 @@ namespace Infrastructure.Services {
             return result;
         }
 
+
+        public async Task<IEnumerable<MovieCardResponseModel>> GetMoviesByString(string sstring) {
+            var movies = await _movieRepository.GetByStringAsync(sstring);
+
+            var result = new List<MovieCardResponseModel>();
+
+            foreach (var movie in movies) {
+                result.Add(
+                new MovieCardResponseModel
+                {
+                    Id = movie.Id,
+                    Title = movie.Title,
+                    PosterUrl = movie.PosterUrl
+                });
+            }
+
+            return result;
+        }
+
+
         /*public async Task<IEnumerable<MovieCardResponseModel>> GetMoviesByMovieCastAsync(int castId) {
             var movies = await _movieRepository.GetMoviesByMovieCastAsync(castId);
             var result = new List<MovieCardResponseModel>();
